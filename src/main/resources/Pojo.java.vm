@@ -27,5 +27,7 @@ public class ${shortClzName} #extendType($EXTEND_NAME){
 #parseWithPrefix("fragment/java/Pojo.java.setter.vm" "    " {"TYPE":${field.typeName},"NAME": ${field.name}})
     #end
 
+
+
 #parseWithPrefix("fragment/java/Pojo.java.toString.vm" "    ")
 }

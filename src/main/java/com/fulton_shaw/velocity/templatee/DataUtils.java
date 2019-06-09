@@ -57,4 +57,16 @@ public class DataUtils {
         return stringBuilder.toString();
     }
 
+    public static void abort(String s) {
+        if (s != null) {
+            throw new RuntimeException("TEMPLATE ABORT:" + s);
+        } else {
+            throw new RuntimeException("TEMPLATE ABORT");
+        }
+    }
+
+    public static void abort() {
+        abort(null);
+    }
+
 }

@@ -105,7 +105,7 @@ function ensure_file_exists {
    fi
    return 0
 }
-ensure_file_exists "$inputFile" || { echo "input-file:$inputFile does not exist" >&2 ;exit 1;}
+ensure_file_exists "$inputFile" || { info "input-file:$inputFile does not exist"  ;exit 1;}
 
 function array_contains {
   [[ -z $1 ]] && return 1
@@ -118,7 +118,7 @@ templateFile=$1
 [[ -z $templateFile ]] && info "requires template file" && exit 1
 
 if [[ $templateFile = '-' || ! -f $templateFile ]];then
-   echo "$templateFile does not exist or is invalid" >&2
+   info "$templateFile does not exist or is invalid"
    exit 1
 fi
 
@@ -128,7 +128,7 @@ if [[ $requiredParamsIsSet = no ]];then
     firstLine=$(head -n1 "$templateFile") || exit
 
     if [[ ! $firstLine =~ ^##\ *required?\ *:\ * ]];then
-        echo "no '##required:' meta info in first line of file $templateFile" >&2
+        info "no '##required:' meta info in first line of file $templateFile"
         exit 1
     fi
 
@@ -216,12 +216,12 @@ fi
 # based on mode
 if [[ -n $selectKeys ]];then
    if [[ $selectKeys == '-' ]];then
-      echo "Value Set:" >&2
+      info "Value Set:"
       for i in "${presentKeys[@]}";do
-          echo "    $i = ${argMap[$i]}" >&2
+          info "    $i = ${argMap[$i]}"
       done
-      echo  "Value Not Set:${notPresentKeys[@]}" >&2
-      echo "Now,select a key to edit:" >&2
+      info  "Value Not Set:${notPresentKeys[@]}"
+      info "Now,select a key to edit:"
       select key in '--NOT SET--' "${notPresentKeys[@]}" '--SET--' "${presentKeys[@]}" '--End--';do
           if [[ $key = '--End--' ]];then break;fi
           if [[ $key =~ ^-- ]];then continue;fi
@@ -229,7 +229,7 @@ if [[ -n $selectKeys ]];then
       done
    else
        for i in "${presentKeys[@]}";do
-           echo "set $i = ${argMap[$i]}" >&2
+           info "set $i = ${argMap[$i]}"
        done
        declare -a selectKeyArr
        selectKeyArr=(${selectKeys//,/ })
@@ -238,10 +238,10 @@ if [[ -n $selectKeys ]];then
        done
    fi
 else
-    echo "Required keys:${requiredParams[@]}" >&2
+    info "Required keys:${requiredParams[@]}"
     for i in "${requiredParams[@]}";do
        if [[ $passSet = yes && ${argMap[$i]+IS_SET} = IS_SET ]];then
-          echo "set $i = ${argMap[$i]}" >&2
+          info "set $i = ${argMap[$i]}"
        else
          read_arg "$i"
        fi
@@ -250,7 +250,7 @@ fi
 
 
 save_input_arg
-echo "-----------------" >&2
+info "-----------------"
 
 declare -a argArr
 let j=0
@@ -293,7 +293,7 @@ elif [[ $OUTPUT_MODE = smart ]];then
    elif [[ $SMART_TYPE = mapper ]];then
        outputFile=${fileKeyValue//.//}.xml
    fi
-   [[ -z $outputFile ]] && info "cannot determine outputFile for smart-type:'$SMART_TYPE'" && exit 1
+   [[ -z $outputFile ]] && info "cannot determine outputFile for --smart-type:'$SMART_TYPE'" && exit 1
    fullFile=$SMART_BASE/$outputFile
    check_redirect_to_file "$fullFile" || exit
 fi

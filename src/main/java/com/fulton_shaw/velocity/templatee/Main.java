@@ -33,6 +33,7 @@ public class Main {
         context.put("PojoUtils", PojoUtils.class);
         context.put("DataUtils", DataUtils.class);
         context.put("ParamUtils", ParamUtils.class);
+        context.put("ShellUtils", ShellUtils.class);
         Calendar calendar = Calendar.getInstance();
         context.put("NOW_DATE", calendar.getTime());
         context.put("NOW_YEAR", calendar.get(Calendar.YEAR));
@@ -87,7 +88,8 @@ public class Main {
             "    IOUtils         the IOUtils.class\n" +
             "    PojoUtils       the PojoUtils.class\n" +
             "    DataUtils       the DataUtils.class\n" +
-            "    ParamUtils      the ParamUtils.class\n"+
+            "    ParamUtils      the ParamUtils.class\n" +
+            "    ShellUtils      the ShellUtils.class\n" +
             "    <Velocity Generic Tools>\n" +
             "    NOW_DATE        current Date object\n" +
             "    NOW_YEAR        current year\n" +
