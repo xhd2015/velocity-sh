@@ -1,0 +1,18 @@
+###############################################
+##   DESCRIPTION   a simple description
+##   AUTHOR        the author
+##   VERSION       the version(used for @since)
+################################################
+/**
+#if($DESCRIPTION)
+* ${DESCRIPTION}
+*
+#end
+#if($AUTHOR)
+* @author ${AUTHOR}
+#end
+* @date ${NOW_YEAR}/${NOW_MONTH}/${NOW_DAY}
+#if($VERSION)
+* @since ${VERSION}
+#end
+*/

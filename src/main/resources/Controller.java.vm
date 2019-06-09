@@ -1,0 +1,16 @@
+###############################
+##
+#############################
+#parse("libpojo.vm")
+import Controller;
+
+#genAutoGenStubOnRequired('' '' '//')
+#parse("fragment/java/FileHeaderComment.vm")
+@Controller
+public class Controller {
+
+    @RequestMapping("")
+
+
+    public
+}

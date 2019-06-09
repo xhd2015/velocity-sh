@@ -1,0 +1,6 @@
+#######################################
+## initiate
+###################INIT###########################
+#set($fieldsMap=$PojoUtils.parseFieldMap($FIELD_MAP))
+#set($fieldsDict=$DataUtils.buildMapWithKey($fieldsMap,'dbName'))
+#set($insertFields = $ParamUtils.parseSimpleList($INSERT_FIELDS))

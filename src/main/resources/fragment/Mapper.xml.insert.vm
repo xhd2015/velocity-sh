@@ -1,0 +1,20 @@
+##########################
+##  METHOD_NAME         the method name
+##  RETRIVE_GEN_ID      indicate useGeneratedKeys=true,value is set to keyProperty
+## RETRIVE_SELECT_KEY_ID   indicate selectKey
+##
+#########################
+#parse("libpojo.vm")
+#parseOnce("fragment/Mapper.xml.init.vm")
+######################
+<insert id="${METHOD_NAME|'insert'}" #if($RETRIVE_GEN_ID)useGeneratedKeys="true" keyProperty="$RETRIVE_GEN_ID"#end>
+    #if($RETRIVE_SELECT_KEY_ID)
+        <selectKey keyProperty="$RETRIVE_SELECT_KEY_ID" resultType="long" order="AFTER">
+            SELECT LAST_INSERT_ID() FROM ${TABLE_NAME}
+        </selectKey>
+    #end
+    INSERT INTO ${TABLE_NAME}
+        (#foreach($field in $insertFields)$field#if($foreach.hasNext),#end#end)
+    VALUES
+        (#foreach($field in $insertFields)${esc.hash}{$fieldsDict.get($field).javaName}#if($foreach.hasNext),#end#end)
+</insert>

@@ -1,0 +1,28 @@
+## required:MAPPER_CLASS_NAME,MODEL_NAME,QUERY_MODEL_NAME,FIELD_MAP,TABLE_NAME,METHOD_QUERY_NAME,INSERT_METHOD_NAME,ADD_AUTOGEN
+###############################################
+## the pojo template, accepting parameters:
+##   MAPPER_CLASS_NAME    full qualified class name
+##   MODEL_NAME   full qualified extends class name
+##   QUERY_MODEL_NAME  full qualified
+##   FIELD_MAP    a list of 'DB_NAME POJO_NAME'
+##   TABLE_NAME
+##   QUERY_METHOD_NAME  query method name(default query)
+##   INSERT_METHOD_NAME insert method name(default insert)
+##
+##   ADD_AUTOGEN  boolean,if the auto gen comment is put
+#######################################################
+#parse("libpojo.vm")
+#parseOnce("fragment/Mapper.xml.init.vm")
+#####################FILE TEXT##########################
+## xml declare should be first line
+<?xml version="1.0" encoding="UTF-8" ?>
+#genAutoGenStubOnRequired('<!--' '-->' '')
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="$MAPPER_CLASS_NAME">
+#parseWithParam("fragment/Mapper.xml.select.vm" {"METHOD_NAME":$!QUERY_METHOD_NAME})
+
+#parseWithParam("fragment/Mapper.xml.insert.vm" {"METHOD_NAME":$!INSERT_METHOD_NAME})
+
+</mapper>

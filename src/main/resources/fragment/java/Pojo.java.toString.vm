@@ -1,0 +1,19 @@
+####################
+##   CLASS_NAME    the CLASS_NAME
+##   FIELD_LIST    a list of 'TYPE NAME'
+###################
+#parse("libpojo.vm")
+#parseOnce("fragment/java/Pojo.java.init.vm")
+###############FILE#################
+public String toString(){
+    StringBuilder s = new StringBuilder();
+    s.append("$shortClzName{");
+    #foreach($field in $fieldList)
+    s.append("#if ($foreach.index>0), #end$field.name = ").append(this.$field.name);
+    #end
+    s.append("}");
+    #if ($EXTEND_NAME)
+    s.append(super.toString());
+    #end
+    return s.toString();
+}

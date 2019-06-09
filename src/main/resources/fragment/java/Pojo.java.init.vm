@@ -1,0 +1,7 @@
+## required: CLASS_NAME,FIELD_LIST
+####################
+##   CLASS_NAME    the CLASS_NAME
+##   FIELD_LIST    a list of 'TYPE NAME'
+###################
+#set($fieldList = $PojoUtils.parseFields($FIELD_LIST))
+#set($shortClzName = $PojoUtils.getShortName($CLASS_NAME))

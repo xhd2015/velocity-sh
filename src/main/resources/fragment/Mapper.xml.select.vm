@@ -1,0 +1,30 @@
+###############################
+##
+## METHOD_NAME   the method name
+## MODEL_NAME    the model name
+## QUERY_MODEL_NAME   the query model name
+##
+###############################
+#parse("libpojo.vm")
+#parseOnce("fragment/Mapper.xml.init.vm")
+################FILE################
+<select id="${METHOD_NAME|'query'}" #if($QUERY_MODEL_NAME)parameterType="$QUERY_MODEL_NAME" #{end}resultType="$MODEL_NAME">
+    SELECT
+    <if test="queryCount">
+        COUNT(*) AS count
+    </if>
+    <if test="!queryCount">
+        #foreach($fieldMap in $fieldsMap)
+          a.`$fieldMap.dbName` AS `$fieldMap.javaName`#if($foreach.hasNext),#end
+        #end
+    </if>
+    FROM ${TABLE_NAME} a
+    <where>
+        <if test="id!=null">
+            a.id = ${esc.hash}{id}
+        </if>
+    </where>
+    <if test="!queryCount">
+        ${esc.dollar}{sqlLimitClause}
+    </if>
+</select>

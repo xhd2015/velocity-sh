@@ -1,0 +1,11 @@
+## required:  TYPE, NAME
+####################
+##   TYPE
+##   NAME
+###################
+#parse("libpojo.vm")
+#parseOnce("fragment/java/Pojo.java.init.vm")
+###############FILE#################
+public void set${PojoUtils.capitalize($NAME)}(${PojoUtils.getShortName(${TYPE})} ${NAME}){
+    this.$NAME = $NAME;
+}

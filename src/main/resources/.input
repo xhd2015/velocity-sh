@@ -1,0 +1,15 @@
+ADD_AUTOGEN=true
+MODEL_NAME=com.fulton_shaw.example.DalasModel
+MAPPER_CLASS_NAME=com.fulton_shaw.example.DalasMapper
+AUTHOR=xiaohuadong
+CLASS_NAME=com.fulton_shaw.example.Pojo
+EXTEND_NAME=
+INSERT_METHOD_NAME=insert
+TYPE=java.lang.Hues
+QUERY_MODEL_NAME=com.fulton_shaw.example.DalasQueryModel
+NAME=cc
+TABLE_NAME=t_ad_info
+METHOD_QUERY_NAME=query
+VERSION=3.0.0
+FIELD_MAP=id,name,uuid,modify_on,create_on
+FIELD_LIST=Long id,String name,String uuid

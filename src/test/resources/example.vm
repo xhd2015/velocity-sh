@@ -1,0 +1,4 @@
+
+Hello java.home = ${sys.getenv("JAVA_HOME")}
+
+random = $myMath.random()

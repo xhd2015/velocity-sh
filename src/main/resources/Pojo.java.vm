@@ -1,0 +1,31 @@
+## required:AUTHOR,VERSION,ADD_AUTOGEN,CLASS_NAME, EXTEND_NAME, FIELD_LIST
+####################################################
+## the pojo template, accepting parameters:
+##   CLASS_NAME    full qualified class name
+##   EXTEND_NAME   full qualified extends class name
+##   FIELD_LIST    a list of 'TYPE NAME'
+##   ADD_AUTOGEN  boolean,if the auto gen comment is put
+##   DESCRIPTION   a simple description
+##   AUTHOR        the author
+##   VERSION       the version(used for @since)
+######################################################
+#parse("libpojo.vm")
+#parseOnce("fragment/java/Pojo.java.init.vm")
+#############FILE####################
+## file start
+#setPackage ($PojoUtils.getPackage($CLASS_NAME))
+#importType($EXTEND_NAME)
+#genAutoGenStubOnRequired('' '' '//')
+#parse("fragment/java/FileHeaderComment.vm")
+public class ${shortClzName} #extendType($EXTEND_NAME){
+    #foreach($field in $fieldList)
+    private $field.typeName $field.name;
+    #end
+
+    #foreach($field in $fieldList)
+#parseWithPrefix("fragment/java/Pojo.java.getter.vm" "    " {"TYPE":${field.typeName},"NAME": ${field.name}})
+#parseWithPrefix("fragment/java/Pojo.java.setter.vm" "    " {"TYPE":${field.typeName},"NAME": ${field.name}})
+    #end
+
+#parseWithPrefix("fragment/java/Pojo.java.toString.vm" "    ")
+}
